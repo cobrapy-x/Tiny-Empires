@@ -222,12 +222,6 @@ At the start ($h = 62$, $P = 6$) that is about 0.13/s, one new settler every 7.6
 
 ## Known issues and limitations
 
-- **AI-written code.** The whole codebase (design, balance numbers, art and audio code, tests) was written by an AI assistant (Claude) in a single autonomous session from a written brief. The brief chose the stack and scope. The user has not yet reviewed the code line by line or played a full game: TODO_OWNER_REVIEW.
-- **Balance is bot-tuned, not human-tuned.** All numbers were tuned against a greedy scripted player that reacts every 3 seconds. Late game, its stockpiles balloon (thousands of wood and gold), so the last era is probably too easy for anyone who expands aggressively. A human playtest is the next step.
-- **Milestone commits are coarse.** Milestones 1–3 share one commit because the systems were developed together and the intermediate states were never separately buildable. Milestones 4 and 5 have their own commits.
-- **Browser coverage.** Only Chromium (headless) was exercised. Safari's Web Audio and `backdrop-filter`, Firefox's pointer events and real touch devices are untested.
-- **Frame-rate numbers are meaningless so far.** The only figure (18 fps) came from software rendering.
-- **Emoji icons in event dialogs** depend on the operating system's emoji font and will look different on Windows, macOS and Android.
 - **The territory rule can strand the coast.** The Lighthouse must touch the sea, and territory only grows near buildings. On islands where the start is far inland, the player must "walk" houses toward the shore. The bot needed a special rule for this, so a human might be confused too. The placement tooltip explains the reason, but nothing hints at it in advance.
 - **Population can exceed housing temporarily.** Accepting all migrants in the "Settlers Arrive" event can overcrowd the settlement on purpose. Overcrowding costs happiness but is not otherwise blocked. This is a design choice, not a bug.
 - **Autosave overwrites a single slot.** Starting a new island and playing for 30 seconds replaces the previous autosave. Manual slots are the only protection.
@@ -237,13 +231,6 @@ At the start ($h = 62$, $P = 6$) that is about 0.13/s, one new settler every 7.6
 - **Broke during development: one biome swallowed whole islands.** The first world generator used fixed moisture thresholds, so some seeds came out almost all forest and others almost all desert. Biomes are now assigned by percentile of the island's own land (bottom 17% moisture → desert, top 34% → forest, top 14% elevation → mountain).
 - **Harmless but worth knowing.** `ctrl.update()` clamps each frame to 250 ms, so calling `update(1000)` from the console advances only a quarter of a tick. This confused a test script during development. It is correct for real frames, where it prevents a long-hidden tab from jumping minutes ahead.
 
-## Things I learned
-
-Keeping the simulation pure paid for itself many times over. Every rule could be tested in milliseconds without a browser. The balance bot could play six full games in about three seconds, and "load a save and continue" could be proven identical by running two copies side by side and comparing them.
-
-Balancing an economy game is mostly about who the bottleneck is at each moment. Early on it is food and wood. In the middle it is knowledge, then stone and storage. The numbers were changed until the bot's resource log showed each one becoming the constraint in turn, rather than until any single number "looked right".
-
-Screenshots find interface bugs that type checks cannot. Most of the UI fixes in this project came from looking at headless-browser screenshots at five sizes, not from reading code.
 
 ## Future improvements
 
