@@ -234,3 +234,5 @@ input[type='range'] { width: 160px; accent-color: var(--accent); }
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+.btn.primary .detail, .btn.primary .cost { color: #4a3b22; opacity: 1; }
+.btn.primary .cost img { filter: none; }

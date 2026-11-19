@@ -153,8 +153,26 @@ export class GameController {
     }
     if (ticks > 0) {
       this.refresh();
+      this.advise();
       this.bus.emit('changed', undefined);
     }
+  }
+
+  private lastAdvice: Record<string, number> = {};
+
+  /** Friendly warnings so problems never come as a surprise. */
+  private advise(): void {
+    const s = this.state;
+    const r = this.report;
+    const say = (key: string, text: string, cooldown = 90): void => {
+      if (s.tick - (this.lastAdvice[key] ?? -9999) < cooldown) return;
+      this.lastAdvice[key] = s.tick;
+      this.bus.emit('toast', { text, kind: 'bad' });
+    };
+    if (r.net.food < 0 && s.resources.food > 0 && s.resources.food / -r.net.food < 30) say('food', '⚠ Food will run out soon — build farms or fishing docks!');
+    if (r.net.gold < 0 && s.resources.gold > 0 && s.resources.gold / -r.net.gold < 30) say('gold', '⚠ Gold is running low — schools and temples stop without it.');
+    if (s.happiness < 30) say('happy', '⚠ Your people are unhappy. Lower taxes, build markets/temples or fix overcrowding.', 120);
+    if (s.tick > 60 && s.population >= r.housing && s.population < 200 && r.jobs > s.population) say('housing', 'Houses are full — build more homes so your population can grow.', 240);
   }
 
   /** Fraction (0..1) of progress toward the next tick — used for smooth animations. */

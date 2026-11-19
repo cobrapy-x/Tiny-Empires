@@ -34,6 +34,7 @@ let ui: UI | null = null;
 game.events.once(Phaser.Core.Events.READY, () => {
   ui = new UI(ctrl, scene, audio);
   ui.showTitle();
+  (window as unknown as { __tinyEmpires: Record<string, unknown> }).__tinyEmpires.ui = ui;
   document.getElementById('loading')?.classList.add('done');
   window.setTimeout(() => document.getElementById('loading')?.remove(), 600);
 });

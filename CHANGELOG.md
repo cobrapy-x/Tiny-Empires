@@ -4,6 +4,15 @@ All notable changes to Tiny Empires are documented here.
 
 ## [Unreleased]
 
+### Milestone 4 — Polish
+- Animated feedback: building pop-in/upgrade squash, construction scaffolds with progress bars, dust puffs, floating "+X wood" production numbers, chimney smoke, drifting cloud shadows, water sparkles.
+- Day/night cycle with glowing windows and a shining lighthouse lamp.
+- Synthesised audio (Web Audio): generative pentatonic soundtrack and 11 sound effects, with separate music / SFX volume.
+- 7-step interactive tutorial with highlighted UI, skippable and replayable.
+- Responsive layout for desktop, tablet, phone portrait and phone landscape; bottom-sheet info panel on phones; long-press tooltips on touch.
+- Early warnings for food/gold shortages, unhappiness and full housing.
+- Readability fixes (cost icons in build cards, primary choice contrast), `[hidden]` handling, settings for UI scale and reduced motion.
+
 ### Milestones 1–3 — Foundation, civilization systems, gameplay depth
 - Vite + TypeScript + Phaser 3 project scaffold.
 - Seeded procedural island generation (grassland, forest, mountains, desert, rivers, beaches, gold veins) with fair, deadlock-free start locations.
