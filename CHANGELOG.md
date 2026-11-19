@@ -2,7 +2,14 @@
 
 All notable changes to Tiny Empires are documented here.
 
-## [Unreleased]
+## [1.0.0] — 2026-11-19
+
+### Milestone 5 — Release
+- README with installation, gameplay, architecture, save format, deployment, test procedure, results, known issues and future work.
+- GitHub Pages workflow (`.github/workflows/deploy.yml`), Cloudflare Pages `_headers`, offline service worker and web manifest.
+- MIT licence and third-party notices (all art and audio generated at runtime).
+- Browser smoke test (`scripts/smoke_test.py`) covering five viewport sizes.
+- Verified: 62/62 unit tests, strict type check, production build, smoke test with no console errors.
 
 ### Milestone 4 — Polish
 - Animated feedback: building pop-in/upgrade squash, construction scaffolds with progress bars, dust puffs, floating "+X wood" production numbers, chimney smoke, drifting cloud shadows, water sparkles.
