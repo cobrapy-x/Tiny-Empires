@@ -2,6 +2,15 @@
 
 All notable changes to Tiny Empires are documented here.
 
+## [1.0.1] — 2026-11-19
+
+### Fixed
+- Island size picker: choosing Large (or Medium after another choice) no longer snaps back to Small in Safari/WebKit. The picker is no longer inside a `<label>`, and its buttons are not re-created on click.
+- Cloudflare deploy: added `wrangler.jsonc` so `npx wrangler deploy` serves `dist/` as static assets instead of failing with "Missing entry-point".
+
+### Added
+- Smoke test checks every island-size choice and that a Large island really is 80×80.
+
 ## [1.0.0] — 2026-11-19
 
 ### Milestone 5 — Release

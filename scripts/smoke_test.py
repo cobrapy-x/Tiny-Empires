@@ -33,7 +33,18 @@ def run(url, chrome, out):
             page.screenshot(path=f"{out}/{name}-1-title.png")
             # New island via the UI
             page.get_by_text("New island").first.click()
+            # Island size picker: each choice must stick (regression: clicks fell through to "Small").
+            for label, tiles in (("Large", 80), ("Small", 48), ("Medium", 64)):
+                page.locator('button[data-size]', has_text=label).click()
+                on = page.locator('button[data-size].on').inner_text()
+                if on != label:
+                    failures.append(f"{name}: picked {label} island but {on} is selected")
+            page.locator('button[data-size]', has_text="Large").click()
             page.get_by_text("Found settlement").click()
+            page.wait_for_timeout(200)
+            size = page.evaluate("() => window.__tinyEmpires.ctrl.state.size")
+            if size != 80:
+                failures.append(f"{name}: chose Large but world size is {size}")
             page.wait_for_timeout(600)
             page.screenshot(path=f"{out}/{name}-2-start.png")
             # Place a farm by clicking its card then a valid tile on the map.

@@ -125,19 +125,34 @@ export class Menus {
     openModal((b, close) => {
       const seed = h('input', { attrs: { type: 'text', value: randomSeedString(), 'aria-label': 'World seed', maxlength: '40' } });
       const sizes = h('div', { class: 'seg', attrs: { role: 'radiogroup', 'aria-label': 'Island size' } });
+      // Build the buttons once and only toggle classes: replacing the clicked
+      // button mid-click made the browser re-target the click to "Small".
+      const sizeButtons = (Object.keys(WORLD_SIZES) as WorldSizeName[]).map((k) =>
+        h('button', {
+          text: `${k[0].toUpperCase()}${k.slice(1)}`,
+          title: `${WORLD_SIZES[k]}×${WORLD_SIZES[k]} tiles`,
+          attrs: { type: 'button', role: 'radio', 'data-size': k },
+          onclick: () => {
+            size = k;
+            renderSizes();
+          },
+        }),
+      );
       const renderSizes = (): void => {
-        sizes.replaceChildren(
-          ...(Object.keys(WORLD_SIZES) as WorldSizeName[]).map((k) =>
-            h('button', { class: size === k ? 'on' : '', text: k[0].toUpperCase() + k.slice(1), onclick: () => ((size = k), renderSizes()) }),
-          ),
-        );
+        for (const b of sizeButtons) {
+          const on = b.dataset.size === size;
+          b.classList.toggle('on', on);
+          b.setAttribute('aria-checked', String(on));
+        }
       };
+      sizes.append(...sizeButtons);
       renderSizes();
       b.append(
         h('h1', { text: '🌱 New island' }),
         h('p', { class: 'muted', text: 'Every seed creates a unique island. Share seeds with friends to play the same map.' }),
-        h('label', { class: 'field' }, h('span', { text: 'Seed' }), h('span', { class: 'row' }, seed, h('button', { class: 'btn small', text: '🎲', title: 'Random seed', onclick: () => (seed.value = randomSeedString()) }))),
-        h('label', { class: 'field' }, h('span', { text: 'Island size' }), sizes),
+        // <div>, not <label>: a label forwards clicks on its contents to its first control.
+        h('div', { class: 'field' }, h('span', { text: 'Seed' }), h('span', { class: 'row' }, seed, h('button', { class: 'btn small', text: '🎲', title: 'Random seed', attrs: { type: 'button' }, onclick: () => (seed.value = randomSeedString()) }))),
+        h('div', { class: 'field' }, h('span', { text: 'Island size' }), sizes),
         h('div', { class: 'actions' },
           h('button', { class: 'btn primary', text: 'Found settlement', onclick: () => {
             this.ctrl.newGame(seed.value.trim() || randomSeedString(), WORLD_SIZES[size]);

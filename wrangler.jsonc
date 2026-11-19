@@ -1,0 +1,10 @@
+// Cloudflare deployment config (Workers static assets).
+// Cloudflare's "Workers & Pages" builder runs `npx wrangler deploy` after the
+// build; without this file it cannot find the built site and the deploy fails.
+{
+  "name": "tiny-empires",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}

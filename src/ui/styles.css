@@ -172,7 +172,7 @@ img.px { image-rendering: pixelated; }
 .ach b { display: block; }
 .slot { display: flex; justify-content: space-between; gap: 8px; align-items: center; padding: 8px; border-radius: 8px; background: rgba(255,255,255,0.05); margin-bottom: 6px; }
 .slot .meta { font-size: 0.85em; color: var(--muted); }
-label.field { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 6px 0; }
+label.field, div.field { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 6px 0; }
 input[type='text'], textarea, select { background: rgba(0,0,0,0.3); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; color: var(--text); }
 textarea { width: 100%; min-height: 80px; font-family: ui-monospace, monospace; font-size: 0.8em; user-select: text; -webkit-user-select: text; }
 input[type='range'] { width: 160px; accent-color: var(--accent); }
