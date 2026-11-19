@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="description" content="Tiny Empires — grow a tiny island settlement into a thriving civilization. A cozy browser city-builder." />
+    <meta name="theme-color" content="#1d4575" />
+    <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <title>Tiny Empires</title>
+  </head>
+  <body>
+    <div id="game" aria-label="Game map"></div>
+    <div id="ui">
+      <header id="topbar">
+        <div id="resources" role="status" aria-live="off"></div>
+        <div id="top-right">
+          <div id="clock"></div>
+          <div id="speed" role="group" aria-label="Simulation speed"></div>
+          <button id="btn-menu" class="icon-btn" title="Menu (Esc)" aria-label="Open menu">☰</button>
+        </div>
+      </header>
+      <div id="goal-tracker" role="button" tabindex="0" title="Goals (G)"></div>
+      <aside id="info-panel" hidden></aside>
+      <div id="build-banner" hidden></div>
+      <nav id="bottombar">
+        <div id="tools"></div>
+        <div id="build-list" role="toolbar" aria-label="Buildings"></div>
+      </nav>
+      <div id="toasts" aria-live="polite"></div>
+      <div id="tutorial" hidden></div>
+      <div id="tooltip" hidden></div>
+      <div id="modal-root"></div>
+    </div>
+    <div id="loading"><div class="logo">TINY EMPIRES</div><div class="sub">Shaping the island…</div></div>
+    <noscript>Tiny Empires needs JavaScript to run.</noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

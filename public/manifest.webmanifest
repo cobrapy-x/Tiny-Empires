@@ -1,0 +1,12 @@
+{
+  "name": "Tiny Empires",
+  "short_name": "Tiny Empires",
+  "description": "Grow a tiny island settlement into a thriving civilization.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#1d4575",
+  "theme_color": "#1d4575",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
